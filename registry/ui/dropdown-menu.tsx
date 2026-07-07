@@ -123,13 +123,21 @@ function DropdownMenuRadioItem({
 	);
 }
 
+/**
+ * Menu heading. A plain styled div by default (Radix semantics): Base UI's
+ * GroupLabel throws when rendered outside a Group, so a bare label must not
+ * use it. When the label sits inside a DropdownMenuGroup, pass `grouped` to
+ * render the real GroupLabel and wire the group's aria-labelledby.
+ */
 function DropdownMenuLabel({
 	className,
 	inset,
+	grouped = false,
 	...props
-}: MenuPrimitive.GroupLabel.Props & { inset?: boolean }) {
+}: MenuPrimitive.GroupLabel.Props & { inset?: boolean; grouped?: boolean }) {
+	const Label = grouped ? MenuPrimitive.GroupLabel : "div";
 	return (
-		<MenuPrimitive.GroupLabel
+		<Label
 			data-slot="dropdown-menu-label"
 			className={cn(
 				"px-2 py-1.5 text-sm font-semibold",

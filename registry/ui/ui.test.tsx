@@ -20,6 +20,7 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
+	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { EmptyState } from "./empty-state";
@@ -120,11 +121,13 @@ describe("primitives render with the shared vocabulary", () => {
 		expect(screen.getByText("Settings")).toBeTruthy();
 	});
 
-	it("dropdown menu opens from its trigger", () => {
+	it("dropdown menu opens from its trigger, with a bare (ungrouped) label", () => {
 		render(
 			<DropdownMenu>
 				<DropdownMenuTrigger>Account</DropdownMenuTrigger>
 				<DropdownMenuContent>
+					{/* Bare label outside any Group must not throw (Base UI #31). */}
+					<DropdownMenuLabel>Session</DropdownMenuLabel>
 					<DropdownMenuItem>Sign out</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>,
@@ -132,6 +135,7 @@ describe("primitives render with the shared vocabulary", () => {
 		expect(screen.queryByText("Sign out")).toBeNull();
 		fireEvent.click(screen.getByText("Account"));
 		expect(screen.getByText("Sign out")).toBeTruthy();
+		expect(screen.getByText("Session")).toBeTruthy();
 	});
 
 	it("tabs select the default tab and show its panel", () => {
