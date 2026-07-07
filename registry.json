@@ -1,0 +1,58 @@
+{
+	"$schema": "https://ui.shadcn.com/schema/registry.json",
+	"name": "ingram-registry",
+	"homepage": "https://ingram-technologies.github.io/registry",
+	"items": [
+		{
+			"name": "email-base",
+			"type": "registry:component",
+			"title": "Email base layout",
+			"description": "Brand-neutral React Email shell (header, content, footer) plus a CTA button and shared styles. Pass your product's identity via the EmailBrand prop, or edit the copied source directly. Ships a renderEmail() helper that returns { html, text } ready for any transactional email transport.",
+			"dependencies": ["@react-email/components", "@react-email/render"],
+			"files": [
+				{
+					"path": "registry/email/base-email.tsx",
+					"type": "registry:component",
+					"target": "components/emails/base-email.tsx"
+				},
+				{
+					"path": "registry/email/render.ts",
+					"type": "registry:lib",
+					"target": "lib/email/render.ts"
+				}
+			]
+		},
+		{
+			"name": "email-invitation",
+			"type": "registry:component",
+			"title": "Organization invitation email",
+			"description": "Transactional email inviting someone to join an organization/team, with an Accept button. Built on email-base; rebrand by customizing the copied source.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/email-base.json"
+			],
+			"files": [
+				{
+					"path": "registry/email/invitation-email.tsx",
+					"type": "registry:component",
+					"target": "components/emails/invitation-email.tsx"
+				}
+			]
+		},
+		{
+			"name": "email-verification",
+			"type": "registry:component",
+			"title": "Email verification email",
+			"description": "Transactional email asking a user to confirm their address, with a Verify button. Built on email-base; rebrand by customizing the copied source.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/email-base.json"
+			],
+			"files": [
+				{
+					"path": "registry/email/verification-email.tsx",
+					"type": "registry:component",
+					"target": "components/emails/verification-email.tsx"
+				}
+			]
+		}
+	]
+}

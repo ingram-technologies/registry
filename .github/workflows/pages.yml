@@ -1,0 +1,38 @@
+name: Deploy registry to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow the workflow to publish a GitHub Pages deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One in-flight deployment at a time; don't cancel a running publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      # shadcn build emits the flattened registry items to public/r/*.json.
+      - run: bun run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4

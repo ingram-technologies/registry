@@ -1,0 +1,9 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["react", "typescript", "unicorn"],
+	"env": { "browser": true, "es2024": true, "node": true },
+	"ignorePatterns": ["public", "node_modules", ".react-email"],
+	"rules": {
+		"no-unused-vars": "error"
+	}
+}

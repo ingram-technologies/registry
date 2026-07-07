@@ -1,0 +1,6 @@
+node_modules
+public/r
+.next
+.react-email
+*.log
+.DS_Store
