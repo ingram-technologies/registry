@@ -123,4 +123,29 @@ describe("email templates render to html + text", () => {
 		expect(noCta.html).toContain("Welcome to");
 		expect(noCta.html).not.toContain("dashboard");
 	});
+
+	it("copy is overridable (heading/body/ctaLabel/preview) — e.g. for i18n", async () => {
+		const { html } = await renderEmail(
+			<InvitationEmail
+				brand={brand}
+				organizationName="Widgets Inc"
+				role="admin"
+				acceptUrl="https://acme.example/accept/x"
+				heading="Vous êtes invité"
+				body="Rejoignez l'équipe."
+				ctaLabel="Accepter"
+				preview="Invitation en attente"
+			/>,
+		);
+		// Overrides win…
+		expect(html).toContain("Vous êtes invité");
+		// The apostrophe is HTML-escaped in output, so match around it.
+		expect(html).toContain("Rejoignez l");
+		expect(html).toContain("équipe");
+		expect(html).toContain("Accepter");
+		expect(html).toContain("Invitation en attente");
+		// …and the English defaults are gone.
+		expect(html).not.toContain("You're invited to");
+		expect(html).not.toContain("Accept invitation");
+	});
 });

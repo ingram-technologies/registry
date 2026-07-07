@@ -86,6 +86,29 @@ await sendEmail({ to, from: fromAddress("Acme", "invites"), subject, html, text 
 Pass `brand` at each render, or (more common) wrap `BaseEmail` in a small local
 component that fills it in from your config so templates stay terse.
 
+### Overriding copy
+
+Every template's visible copy is overridable via optional props — `heading`,
+`body`, `ctaLabel`, `preview` — each defaulting to English. Pass your own strings
+(or translated ones, for i18n) without touching the source:
+
+```tsx
+<InvitationEmail
+	brand={brand}
+	organizationName="Widgets Inc"
+	role="admin"
+	acceptUrl={acceptUrl}
+	heading="Vous êtes invité"
+	body="Rejoignez l'équipe."
+	ctaLabel="Accepter"
+/>
+```
+
+Deliberately high-level: the headline, body, CTA, and preheader are props;
+deeper structure and the secondary boilerplate (the "paste this link" line,
+footer chrome) you change by editing the copied source you own. Style is the
+same story — `brand` covers logo/color/name; anything deeper, edit the source.
+
 ## Developing this registry
 
 ```bash
