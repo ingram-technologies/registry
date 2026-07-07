@@ -2,8 +2,11 @@ import { describe, expect, it } from "vitest";
 import { BaseEmail } from "./base-email";
 import type { EmailBrand } from "./base-email";
 import { InvitationEmail } from "./invitation-email";
+import { MagicLinkEmail } from "./magic-link-email";
+import { PasswordResetEmail } from "./password-reset-email";
 import { renderEmail } from "./render";
 import { VerificationEmail } from "./verification-email";
+import { WelcomeEmail } from "./welcome-email";
 
 const brand: EmailBrand = {
 	productName: "Acme",
@@ -72,5 +75,52 @@ describe("email templates render to html + text", () => {
 			</BaseEmail>,
 		);
 		expect(html).toContain("Acme"); // defaultBrand placeholder
+	});
+
+	it("magic-link carries the sign-in url", async () => {
+		const { html, text } = await renderEmail(
+			<MagicLinkEmail
+				brand={brand}
+				signInUrl="https://acme.example/magic/tok123"
+			/>,
+		);
+		// React inserts <!-- --> markers at interpolation boundaries, so assert
+		// the static and dynamic parts separately rather than the joined string.
+		expect(html).toContain("Sign in");
+		expect(html).toContain("https://acme.example/magic/tok123");
+		expect(text).toContain("https://acme.example/magic/tok123");
+		expect(text.toLowerCase()).toContain("sign in to acme");
+	});
+
+	it("password-reset carries greeting and reset url", async () => {
+		const { html, text } = await renderEmail(
+			<PasswordResetEmail
+				brand={brand}
+				name="Sam"
+				resetUrl="https://acme.example/reset/tok456"
+			/>,
+		);
+		expect(html).toContain("Reset your password");
+		expect(html).toContain("Sam");
+		expect(html).toContain("https://acme.example/reset/tok456");
+		expect(text).toContain("https://acme.example/reset/tok456");
+	});
+
+	it("welcome renders with and without a CTA", async () => {
+		const withCta = await renderEmail(
+			<WelcomeEmail
+				brand={brand}
+				name="Sam"
+				ctaUrl="https://acme.example/dashboard"
+				ctaLabel="Open dashboard"
+			/>,
+		);
+		expect(withCta.html).toContain("Welcome to");
+		expect(withCta.html).toContain("https://acme.example/dashboard");
+		expect(withCta.html).toContain("Open dashboard");
+
+		const noCta = await renderEmail(<WelcomeEmail brand={brand} name="Sam" />);
+		expect(noCta.html).toContain("Welcome to");
+		expect(noCta.html).not.toContain("dashboard");
 	});
 });

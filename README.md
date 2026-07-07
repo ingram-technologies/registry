@@ -20,11 +20,14 @@ Registry endpoint: **`https://ingram-technologies.github.io/registry`**
 
 Currently one layer — **email** (transactional React Email templates):
 
-| Item                 | What it is                                                             |
-| -------------------- | --------------------------------------------------------------------- |
-| `email-base`         | Brand-neutral shell + CTA button + shared styles + `renderEmail()`    |
-| `email-invitation`   | Organization/team invitation (built on `email-base`)                  |
-| `email-verification` | Email-address verification (built on `email-base`)                    |
+| Item                   | What it is                                                          |
+| ---------------------- | ------------------------------------------------------------------ |
+| `email-base`           | Brand-neutral shell + CTA button + shared styles + `renderEmail()` |
+| `email-invitation`     | Organization/team invitation (built on `email-base`)               |
+| `email-verification`   | Email-address verification (built on `email-base`)                 |
+| `email-magic-link`     | Passwordless / magic-link sign-in (built on `email-base`)          |
+| `email-password-reset` | Password reset (built on `email-base`)                             |
+| `email-welcome`        | Post-signup welcome, optional CTA (built on `email-base`)          |
 
 ## Consuming it
 

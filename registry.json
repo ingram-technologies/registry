@@ -53,6 +53,54 @@
 					"target": "components/emails/verification-email.tsx"
 				}
 			]
+		},
+		{
+			"name": "email-magic-link",
+			"type": "registry:component",
+			"title": "Magic-link sign-in email",
+			"description": "Transactional email with a one-time sign-in link (passwordless / magic link), with a Sign in button. Built on email-base; rebrand by customizing the copied source.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/email-base.json"
+			],
+			"files": [
+				{
+					"path": "registry/email/magic-link-email.tsx",
+					"type": "registry:component",
+					"target": "components/emails/magic-link-email.tsx"
+				}
+			]
+		},
+		{
+			"name": "email-password-reset",
+			"type": "registry:component",
+			"title": "Password reset email",
+			"description": "Transactional email with a one-time password-reset link, with a Reset password button. Built on email-base; rebrand by customizing the copied source.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/email-base.json"
+			],
+			"files": [
+				{
+					"path": "registry/email/password-reset-email.tsx",
+					"type": "registry:component",
+					"target": "components/emails/password-reset-email.tsx"
+				}
+			]
+		},
+		{
+			"name": "email-welcome",
+			"type": "registry:component",
+			"title": "Welcome email",
+			"description": "Transactional welcome email sent after signup, with an optional call-to-action button. Built on email-base; rebrand by customizing the copied source.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/email-base.json"
+			],
+			"files": [
+				{
+					"path": "registry/email/welcome-email.tsx",
+					"type": "registry:component",
+					"target": "components/emails/welcome-email.tsx"
+				}
+			]
 		}
 	]
 }
