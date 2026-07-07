@@ -101,6 +101,408 @@
 					"target": "components/emails/welcome-email.tsx"
 				}
 			]
+		},
+		{
+			"name": "dashboard-theme",
+			"type": "registry:theme",
+			"title": "Dashboard theme",
+			"description": "The fleet's shared dashboard token set: chroma-0 neutral ramp with a single signal-red primary, dark-first, plus success/warning, chart, and sidebar tokens. Apply once per app; every ui-layer component reads these variables.",
+			"cssVars": {
+				"light": {
+					"background": "oklch(1 0 0)",
+					"foreground": "oklch(0.2264 0 0)",
+					"card": "oklch(1 0 0)",
+					"card-foreground": "oklch(0.2264 0 0)",
+					"popover": "oklch(1 0 0)",
+					"popover-foreground": "oklch(0.2264 0 0)",
+					"primary": "oklch(0.6846 0.2042 24.2803)",
+					"primary-foreground": "oklch(0.985 0 0)",
+					"secondary": "oklch(0.9702 0 0)",
+					"secondary-foreground": "oklch(0.205 0 0)",
+					"muted": "oklch(0.9702 0 0)",
+					"muted-foreground": "oklch(0.5555 0 0)",
+					"accent": "oklch(0.9702 0 0)",
+					"accent-foreground": "oklch(0.205 0 0)",
+					"destructive": "oklch(0.6846 0.2042 24.2803)",
+					"destructive-foreground": "oklch(0.985 0 0)",
+					"success": "oklch(0.62 0.17 150)",
+					"success-foreground": "oklch(0.985 0 0)",
+					"warning": "oklch(0.78 0.16 80)",
+					"warning-foreground": "oklch(0.2264 0 0)",
+					"border": "oklch(0.9219 0 0)",
+					"input": "oklch(0.9219 0 0)",
+					"ring": "oklch(0.6846 0.2042 24.2803)",
+					"chart-1": "oklch(0.6846 0.2042 24.2803)",
+					"chart-2": "oklch(0.7558 0.1551 44.4232)",
+					"chart-3": "oklch(0.8953 0.1734 160.3395)",
+					"chart-4": "oklch(0.702 0.1581 255.8721)",
+					"chart-5": "oklch(0.6492 0.2412 306.4784)",
+					"radius": "0.5rem",
+					"sidebar": "oklch(0.9702 0 0)",
+					"sidebar-foreground": "oklch(0.2264 0 0)",
+					"sidebar-primary": "oklch(0.6846 0.2042 24.2803)",
+					"sidebar-primary-foreground": "oklch(0.985 0 0)",
+					"sidebar-accent": "oklch(0.94 0 0)",
+					"sidebar-accent-foreground": "oklch(0.2264 0 0)",
+					"sidebar-border": "oklch(0.9219 0 0)",
+					"sidebar-ring": "oklch(0.6846 0.2042 24.2803)"
+				},
+				"dark": {
+					"background": "oklch(0.2264 0 0)",
+					"foreground": "oklch(0.9702 0 0)",
+					"card": "oklch(0.2686 0 0)",
+					"card-foreground": "oklch(0.9702 0 0)",
+					"popover": "oklch(0.2686 0 0)",
+					"popover-foreground": "oklch(0.9702 0 0)",
+					"primary": "oklch(0.6846 0.2042 24.2803)",
+					"primary-foreground": "oklch(0.985 0 0)",
+					"secondary": "oklch(0.3211 0 0)",
+					"secondary-foreground": "oklch(0.9702 0 0)",
+					"muted": "oklch(0.3211 0 0)",
+					"muted-foreground": "oklch(0.7155 0 0)",
+					"accent": "oklch(0.3211 0 0)",
+					"accent-foreground": "oklch(0.9702 0 0)",
+					"destructive": "oklch(0.6846 0.2042 24.2803)",
+					"destructive-foreground": "oklch(0.985 0 0)",
+					"success": "oklch(0.7 0.16 150)",
+					"success-foreground": "oklch(0.2264 0 0)",
+					"warning": "oklch(0.82 0.15 80)",
+					"warning-foreground": "oklch(0.2264 0 0)",
+					"border": "oklch(0.3211 0 0)",
+					"input": "oklch(1 0 0 / 15%)",
+					"ring": "oklch(0.6846 0.2042 24.2803)",
+					"chart-1": "oklch(0.6846 0.2042 24.2803)",
+					"chart-2": "oklch(0.7558 0.1551 44.4232)",
+					"chart-3": "oklch(0.8953 0.1734 160.3395)",
+					"chart-4": "oklch(0.702 0.1581 255.8721)",
+					"chart-5": "oklch(0.6492 0.2412 306.4784)",
+					"radius": "0.5rem",
+					"sidebar": "oklch(0.2686 0 0)",
+					"sidebar-foreground": "oklch(0.9702 0 0)",
+					"sidebar-primary": "oklch(0.6846 0.2042 24.2803)",
+					"sidebar-primary-foreground": "oklch(0.985 0 0)",
+					"sidebar-accent": "oklch(0.3211 0 0)",
+					"sidebar-accent-foreground": "oklch(0.9702 0 0)",
+					"sidebar-border": "oklch(0.3211 0 0)",
+					"sidebar-ring": "oklch(0.6846 0.2042 24.2803)"
+				}
+			}
+		},
+		{
+			"name": "button",
+			"type": "registry:component",
+			"title": "Button",
+			"description": "Button with brand/destructive/outline/secondary/ghost/link variants and an asChild escape hatch, built on the Base UI button.",
+			"dependencies": ["@base-ui/react", "class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/button.tsx",
+					"type": "registry:component",
+					"target": "components/ui/button.tsx"
+				}
+			]
+		},
+		{
+			"name": "badge",
+			"type": "registry:component",
+			"title": "Badge",
+			"description": "Small inline label for counts and categories, with brand/secondary/destructive/outline variants.",
+			"dependencies": ["class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/badge.tsx",
+					"type": "registry:component",
+					"target": "components/ui/badge.tsx"
+				}
+			]
+		},
+		{
+			"name": "card",
+			"type": "registry:component",
+			"title": "Card",
+			"description": "Surface container with header/title/description/action/content/footer slots.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/card.tsx",
+					"type": "registry:component",
+					"target": "components/ui/card.tsx"
+				}
+			]
+		},
+		{
+			"name": "input",
+			"type": "registry:component",
+			"title": "Input",
+			"description": "Text input styled to the shared form-control vocabulary.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/input.tsx",
+					"type": "registry:component",
+					"target": "components/ui/input.tsx"
+				}
+			]
+		},
+		{
+			"name": "textarea",
+			"type": "registry:component",
+			"title": "Textarea",
+			"description": "Auto-growing textarea (field-sizing) matching the input styling.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/textarea.tsx",
+					"type": "registry:component",
+					"target": "components/ui/textarea.tsx"
+				}
+			]
+		},
+		{
+			"name": "label",
+			"type": "registry:component",
+			"title": "Label",
+			"description": "Form label with peer-disabled handling.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/label.tsx",
+					"type": "registry:component",
+					"target": "components/ui/label.tsx"
+				}
+			]
+		},
+		{
+			"name": "select",
+			"type": "registry:component",
+			"title": "Select",
+			"description": "Listbox-style select (trigger, popup, items, groups) built on the Base UI select.",
+			"dependencies": ["@base-ui/react", "lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/select.tsx",
+					"type": "registry:component",
+					"target": "components/ui/select.tsx"
+				}
+			]
+		},
+		{
+			"name": "dialog",
+			"type": "registry:component",
+			"title": "Dialog",
+			"description": "Modal dialog with overlay, header/footer/title/description slots and a built-in close button, built on the Base UI dialog.",
+			"dependencies": ["@base-ui/react", "lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/dialog.tsx",
+					"type": "registry:component",
+					"target": "components/ui/dialog.tsx"
+				}
+			]
+		},
+		{
+			"name": "dropdown-menu",
+			"type": "registry:component",
+			"title": "Dropdown menu",
+			"description": "Menu with items (default/destructive), checkbox/radio items, groups, labels, separators and submenus, built on the Base UI menu.",
+			"dependencies": ["@base-ui/react", "lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/dropdown-menu.tsx",
+					"type": "registry:component",
+					"target": "components/ui/dropdown-menu.tsx"
+				}
+			]
+		},
+		{
+			"name": "tooltip",
+			"type": "registry:component",
+			"title": "Tooltip",
+			"description": "Hover/focus tooltip built on the Base UI tooltip (provider, root, trigger, content).",
+			"dependencies": ["@base-ui/react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/tooltip.tsx",
+					"type": "registry:component",
+					"target": "components/ui/tooltip.tsx"
+				}
+			]
+		},
+		{
+			"name": "tabs",
+			"type": "registry:component",
+			"title": "Tabs",
+			"description": "Tab strip and panels built on the Base UI tabs.",
+			"dependencies": ["@base-ui/react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/tabs.tsx",
+					"type": "registry:component",
+					"target": "components/ui/tabs.tsx"
+				}
+			]
+		},
+		{
+			"name": "avatar",
+			"type": "registry:component",
+			"title": "Avatar",
+			"description": "User/organization avatar with image and initials fallback, built on the Base UI avatar.",
+			"dependencies": ["@base-ui/react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/avatar.tsx",
+					"type": "registry:component",
+					"target": "components/ui/avatar.tsx"
+				}
+			]
+		},
+		{
+			"name": "separator",
+			"type": "registry:component",
+			"title": "Separator",
+			"description": "Horizontal/vertical rule built on the Base UI separator.",
+			"dependencies": ["@base-ui/react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/separator.tsx",
+					"type": "registry:component",
+					"target": "components/ui/separator.tsx"
+				}
+			]
+		},
+		{
+			"name": "skeleton",
+			"type": "registry:component",
+			"title": "Skeleton",
+			"description": "Loading placeholder block (reduced-motion aware).",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/skeleton.tsx",
+					"type": "registry:component",
+					"target": "components/ui/skeleton.tsx"
+				}
+			]
+		},
+		{
+			"name": "table",
+			"type": "registry:component",
+			"title": "Table",
+			"description": "Semantic table primitives (container, header, body, footer, row, head, cell, caption) with an overflow-x wrapper.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/table.tsx",
+					"type": "registry:component",
+					"target": "components/ui/table.tsx"
+				}
+			]
+		},
+		{
+			"name": "toaster",
+			"type": "registry:component",
+			"title": "Toaster",
+			"description": "Sonner toast outlet themed via the shared token vocabulary; re-exports toast().",
+			"dependencies": ["sonner"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/toaster.tsx",
+					"type": "registry:component",
+					"target": "components/ui/toaster.tsx"
+				}
+			]
+		},
+		{
+			"name": "page-header",
+			"type": "registry:component",
+			"title": "Page header",
+			"description": "The one page-title bar every dashboard page shares: leading slot, optional icon chip, title + description, trailing actions.",
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/page-header.tsx",
+					"type": "registry:component",
+					"target": "components/ui/page-header.tsx"
+				}
+			]
+		},
+		{
+			"name": "empty-state",
+			"type": "registry:component",
+			"title": "Empty state",
+			"description": "Consistent zero-data placeholder for list pages: icon, title, description, and a call-to-action that teaches the next step.",
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/empty-state.tsx",
+					"type": "registry:component",
+					"target": "components/ui/empty-state.tsx"
+				}
+			]
+		},
+		{
+			"name": "stat-card",
+			"type": "registry:component",
+			"title": "Stat card",
+			"description": "Compact metric tile (icon + label + tabular value + sublabel) plus a compactNumber() formatter.",
+			"dependencies": ["lucide-react"],
+			"registryDependencies": [
+				"utils",
+				"https://ingram-technologies.github.io/registry/r/card.json"
+			],
+			"files": [
+				{
+					"path": "registry/ui/stat-card.tsx",
+					"type": "registry:component",
+					"target": "components/ui/stat-card.tsx"
+				}
+			]
+		},
+		{
+			"name": "status-badge",
+			"type": "registry:component",
+			"title": "Status badge",
+			"description": "Semantic status pill mapping entity states (succeeded/failed/pending/running/…) to one consistent color language, with a tone override.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"path": "registry/ui/status-badge.tsx",
+					"type": "registry:component",
+					"target": "components/ui/status-badge.tsx"
+				}
+			]
+		},
+		{
+			"name": "delete-confirm-dialog",
+			"type": "registry:component",
+			"title": "Delete confirm dialog",
+			"description": "Type-to-confirm destructive dialog: the user must type the resource name verbatim before the delete button enables.",
+			"dependencies": ["lucide-react"],
+			"registryDependencies": [
+				"utils",
+				"https://ingram-technologies.github.io/registry/r/dialog.json",
+				"https://ingram-technologies.github.io/registry/r/input.json",
+				"https://ingram-technologies.github.io/registry/r/button.json"
+			],
+			"files": [
+				{
+					"path": "registry/ui/delete-confirm-dialog.tsx",
+					"type": "registry:component",
+					"target": "components/ui/delete-confirm-dialog.tsx"
+				}
+			]
 		}
 	]
 }

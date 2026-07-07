@@ -11,8 +11,12 @@
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"verbatimModuleSyntax": true,
-		"types": ["node"]
+		"types": ["node"],
+		"paths": {
+			"@/components/ui/*": ["./registry/ui/*"],
+			"@/*": ["./*"]
+		}
 	},
-	"include": ["registry", "preview", "scripts"],
+	"include": ["registry", "preview", "scripts", "lib"],
 	"exclude": ["node_modules", "public"]
 }

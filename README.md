@@ -18,7 +18,10 @@ Registry endpoint: **`https://ingram-technologies.github.io/registry`**
 
 ## What's here
 
-Currently one layer — **email** (transactional React Email templates):
+Two layers so far: **email** (transactional React Email templates) and **ui**
+(the shared dashboard component kit).
+
+### email
 
 | Item                   | What it is                                                          |
 | ---------------------- | ------------------------------------------------------------------ |
@@ -28,6 +31,38 @@ Currently one layer — **email** (transactional React Email templates):
 | `email-magic-link`     | Passwordless / magic-link sign-in (built on `email-base`)          |
 | `email-password-reset` | Password reset (built on `email-base`)                             |
 | `email-welcome`        | Post-signup welcome, optional CTA (built on `email-base`)          |
+
+### ui
+
+The common vocabulary for the fleet's organization-dashboard apps, so every
+product's console reads as one system. Primitives are built on
+[Base UI](https://base-ui.com) (the fleet's primitive layer going forward) +
+`class-variance-authority`, styled exclusively through the semantic token
+vocabulary (`bg-primary`, `text-muted-foreground`, …) — so the same source
+renders correctly in any app that defines the tokens. Sources import
+`cn` from `@/lib/utils` (every app has it from `shadcn init`).
+
+**Theme** — apply once per app; everything below reads these variables:
+
+| Item              | What it is                                                                                      |
+| ----------------- | ----------------------------------------------------------------------------------------------- |
+| `dashboard-theme` | Shared token set: chroma-0 neutral ramp, one signal-red primary, dark-first, success/warning, chart + sidebar tokens |
+
+**Primitives** (Tailwind v4, `components/ui/*`):
+
+`button` · `badge` · `card` · `input` · `textarea` · `label` · `select` ·
+`dialog` · `dropdown-menu` · `tooltip` · `tabs` · `avatar` · `separator` ·
+`skeleton` · `table` · `toaster`
+
+**Dashboard patterns** (the pieces list pages share):
+
+| Item                    | What it is                                                            |
+| ----------------------- | --------------------------------------------------------------------- |
+| `page-header`           | The one page-title bar: leading slot, icon chip, title + description, actions |
+| `empty-state`           | Zero-data placeholder that teaches the next step                       |
+| `stat-card`             | Compact metric tile + `compactNumber()` formatter                      |
+| `status-badge`          | Semantic status pill with one consistent tone mapping                  |
+| `delete-confirm-dialog` | Type-to-confirm destructive dialog                                     |
 
 ## Consuming it
 
@@ -130,14 +165,14 @@ names in any tracked file, path, or unpushed commit message.
 1. Add the source under `registry/<layer>/`.
 2. Register it in [`registry.json`](./registry.json) with `files` targets and
    any `dependencies` / `registryDependencies`.
-3. Add a `preview/*.tsx` and a render assertion in the test.
+3. Add a render assertion in the layer's test (email items also get a
+   `preview/*.tsx` for the React Email preview server).
 4. `bun run check && bun run build` — CI deploys to Pages on merge to `main`.
 
-## Roadmap: two layers
+## Roadmap
 
-This is built to grow into two layers, distributed as shadcn namespaces:
-
-- **shared** — brand-neutral primitives usable by any app (what's here today).
-- **ingram** — Ingram-flavored components that assume our conventions.
-
-Email is the first slice; more component families follow.
+Email and the dashboard ui kit are the first two slices. Next: the
+organization-dashboard shell — app sidebar, organization/workspace switcher,
+user menu, and the Better Auth organization surfaces (members + invitations
+manager, accept-invitation flow) — so a new org-based product starts from a
+working console instead of a blank page.
