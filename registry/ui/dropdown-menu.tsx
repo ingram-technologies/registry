@@ -134,7 +134,7 @@ function DropdownMenuLabel({
 	inset,
 	grouped = false,
 	...props
-}: MenuPrimitive.GroupLabel.Props & { inset?: boolean; grouped?: boolean }) {
+}: React.ComponentProps<"div"> & { inset?: boolean; grouped?: boolean }) {
 	const Label = grouped ? MenuPrimitive.GroupLabel : "div";
 	return (
 		<Label
