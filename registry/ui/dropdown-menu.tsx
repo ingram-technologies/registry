@@ -23,10 +23,12 @@ const popupClasses =
 
 function DropdownMenuContent({
 	className,
+	side,
 	sideOffset = 4,
 	align = "start",
 	...props
 }: MenuPrimitive.Popup.Props & {
+	side?: MenuPrimitive.Positioner.Props["side"];
 	sideOffset?: MenuPrimitive.Positioner.Props["sideOffset"];
 	align?: MenuPrimitive.Positioner.Props["align"];
 }) {
@@ -34,6 +36,7 @@ function DropdownMenuContent({
 		<MenuPrimitive.Portal>
 			<MenuPrimitive.Positioner
 				className="z-50"
+				side={side}
 				sideOffset={sideOffset}
 				align={align}
 			>
