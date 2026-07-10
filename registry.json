@@ -8,7 +8,7 @@
 			"type": "registry:component",
 			"title": "Email base layout",
 			"description": "Brand-neutral React Email shell (header, content, footer) plus a CTA button and shared styles. Pass your product's identity via the EmailBrand prop, or edit the copied source directly. Ships a renderEmail() helper that returns { html, text } ready for any transactional email transport.",
-			"dependencies": ["@react-email/components", "@react-email/render"],
+			"dependencies": ["react-email"],
 			"files": [
 				{
 					"path": "registry/email/base-email.tsx",

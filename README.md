@@ -10,7 +10,7 @@ _technical_ foundation, not a locked _design_ foundation.
 > forces one look behind a prop wall; a registry hands you a high-quality,
 > cross-client-tested starting point that you then make yours. Hard correctness
 > (HTML escaping, email-client quirks) stays in the shared dependencies
-> (`@react-email/*`, [`@ingram-tech/nk-email`](https://github.com/ingram-technologies/nextkit/tree/main/packages/nk-email));
+> (`react-email`, [`@ingram-tech/nk-email`](https://github.com/ingram-technologies/nextkit/tree/main/packages/nk-email));
 > the presentation you own.
 
 Registry endpoint: **`https://ingram-technologies.github.io/registry`**
@@ -80,7 +80,7 @@ npx shadcn@latest add @ingram/email-invitation
 ```
 
 `registryDependencies` pull `email-base` automatically, and the item's npm
-`dependencies` (`@react-email/components`, `@react-email/render`) install into
+`dependencies` (`react-email`) install into
 the app — this is what brings React Email into an app that didn't have it.
 
 Files land in `components/emails/` and `lib/email/`. **They're yours now** —

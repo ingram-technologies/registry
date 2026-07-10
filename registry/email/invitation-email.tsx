@@ -1,4 +1,4 @@
-import { Heading, Text } from "@react-email/components";
+import { Heading, Text } from "react-email";
 import type { ReactNode } from "react";
 import { BaseEmail, EmailButton, styles } from "./base-email";
 import type { EmailBrand } from "./base-email";

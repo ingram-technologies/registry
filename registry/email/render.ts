@@ -1,5 +1,5 @@
-import { render } from "@react-email/render";
 import type { ReactElement } from "react";
+import { render, toPlainText } from "react-email";
 
 /**
  * Render a React Email element to both MIME parts. Hand the result straight to
@@ -13,9 +13,6 @@ import type { ReactElement } from "react";
 export async function renderEmail(
 	element: ReactElement,
 ): Promise<{ html: string; text: string }> {
-	const [html, text] = await Promise.all([
-		render(element),
-		render(element, { plainText: true }),
-	]);
-	return { html, text };
+	const html = await render(element);
+	return { html, text: toPlainText(html) };
 }
