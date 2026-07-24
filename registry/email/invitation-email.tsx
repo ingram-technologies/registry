@@ -1,7 +1,7 @@
 import { Heading, Text } from "react-email";
 import type { ReactNode } from "react";
-import { BaseEmail, EmailButton, styles } from "./base-email";
-import type { EmailBrand } from "./base-email";
+import { BaseEmail, EmailButton, WireLink, emailStyles } from "./base-email";
+import type { EmailBrand } from "./theme";
 
 export interface InvitationEmailProps {
 	/** Product identity. Defaults to a neutral placeholder — override per app. */
@@ -14,8 +14,8 @@ export interface InvitationEmailProps {
 	role: string;
 	/** Fully-formed accept link — the app builds this from its own routes. */
 	acceptUrl: string;
-	/** Optional expiry line, e.g. "This invitation expires in 7 days." */
-	expiresNote?: string;
+	/** Expiry line, e.g. "This invitation expires in 7 days." */
+	expiresNote?: ReactNode;
 	/** Override the inbox preview / preheader. Defaults to English. */
 	preview?: string;
 	/** Override the heading. Defaults to English. Pass translated copy for i18n. */
@@ -38,6 +38,7 @@ export function InvitationEmail({
 	body,
 	ctaLabel,
 }: InvitationEmailProps) {
+	const s = emailStyles(brand);
 	const productName = brand?.productName ?? "us";
 	return (
 		<BaseEmail
@@ -46,11 +47,11 @@ export function InvitationEmail({
 				preview ?? `${inviterName} invited you to join ${organizationName}`
 			}
 		>
-			<Heading style={styles.heading}>
+			<Heading {...s.heading}>
 				{heading ?? <>You're invited to {organizationName}</>}
 			</Heading>
 
-			<Text style={styles.paragraph}>
+			<Text {...s.paragraph}>
 				{body ?? (
 					<>
 						{inviterName} invited you to join{" "}
@@ -60,17 +61,13 @@ export function InvitationEmail({
 				)}
 			</Text>
 
-			<EmailButton href={acceptUrl} color={brand?.brandColor}>
+			<EmailButton brand={brand} href={acceptUrl}>
 				{ctaLabel ?? "Accept invitation"}
 			</EmailButton>
 
-			{expiresNote ? <Text style={styles.muted}>{expiresNote}</Text> : null}
+			{expiresNote ? <Text {...s.muted}>{expiresNote}</Text> : null}
 
-			<Text style={styles.muted}>
-				Or paste this link into your browser:
-				<br />
-				{acceptUrl}
-			</Text>
+			<WireLink brand={brand} url={acceptUrl} />
 		</BaseEmail>
 	);
 }

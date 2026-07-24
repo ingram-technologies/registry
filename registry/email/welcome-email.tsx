@@ -1,14 +1,14 @@
 import { Heading, Text } from "react-email";
 import type { ReactNode } from "react";
-import { BaseEmail, EmailButton, styles } from "./base-email";
-import type { EmailBrand } from "./base-email";
+import { BaseEmail, EmailButton, emailStyles } from "./base-email";
+import type { EmailBrand } from "./theme";
 
 export interface WelcomeEmailProps {
 	/** Product identity. Defaults to a neutral placeholder — override per app. */
 	brand?: EmailBrand;
 	/** Recipient's display name, if known — personalizes the greeting. */
 	name?: string;
-	/** Optional call-to-action link, e.g. the dashboard. */
+	/** Call-to-action link, e.g. the dashboard. Omit for a CTA-less welcome. */
 	ctaUrl?: string;
 	/** CTA button label. Defaults to "Get started". */
 	ctaLabel?: ReactNode;
@@ -29,25 +29,24 @@ export function WelcomeEmail({
 	heading,
 	body,
 }: WelcomeEmailProps) {
+	const s = emailStyles(brand);
 	const productName = brand?.productName ?? "us";
 	const who = name?.trim() || "there";
 	return (
 		<BaseEmail brand={brand} preview={preview ?? `Welcome to ${productName}`}>
-			<Heading style={styles.heading}>
-				{heading ?? <>Welcome to {productName}</>}
-			</Heading>
+			<Heading {...s.heading}>{heading ?? <>Welcome to {productName}</>}</Heading>
 
-			<Text style={styles.paragraph}>
+			<Text {...s.paragraph}>
 				{body ?? (
 					<>
-						Hi {who}, thanks for joining {productName}. We're glad to have
-						you.
+						Hi {who}, thanks for joining {productName}. Your account is
+						ready.
 					</>
 				)}
 			</Text>
 
 			{ctaUrl ? (
-				<EmailButton href={ctaUrl} color={brand?.brandColor}>
+				<EmailButton brand={brand} href={ctaUrl}>
 					{ctaLabel}
 				</EmailButton>
 			) : null}

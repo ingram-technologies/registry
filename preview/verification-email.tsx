@@ -1,16 +1,10 @@
 import { VerificationEmail } from "../registry/email/verification-email";
-
-const brand = {
-	productName: "Acme",
-	baseUrl: "https://acme.example",
-	brandColor: "#2563eb",
-	supportUrl: "/contact",
-};
+import { neutral } from "./brand";
 
 export default function Preview() {
 	return (
 		<VerificationEmail
-			brand={brand}
+			brand={neutral}
 			name="Sam"
 			verifyUrl="https://acme.example/verify/xyz789"
 		/>

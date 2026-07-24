@@ -1,16 +1,10 @@
 import { WelcomeEmail } from "../registry/email/welcome-email";
-
-const brand = {
-	productName: "Acme",
-	baseUrl: "https://acme.example",
-	brandColor: "#2563eb",
-	supportUrl: "/contact",
-};
+import { neutral } from "./brand";
 
 export default function Preview() {
 	return (
 		<WelcomeEmail
-			brand={brand}
+			brand={neutral}
 			name="Sam"
 			ctaUrl="https://acme.example/dashboard"
 			ctaLabel="Open dashboard"

@@ -1,7 +1,7 @@
 import { Heading, Text } from "react-email";
 import type { ReactNode } from "react";
-import { BaseEmail, EmailButton, styles } from "./base-email";
-import type { EmailBrand } from "./base-email";
+import { BaseEmail, EmailButton, WireLink, emailStyles } from "./base-email";
+import type { EmailBrand } from "./theme";
 
 export interface PasswordResetEmailProps {
 	/** Product identity. Defaults to a neutral placeholder — override per app. */
@@ -29,6 +29,7 @@ export function PasswordResetEmail({
 	body,
 	ctaLabel,
 }: PasswordResetEmailProps) {
+	const s = emailStyles(brand);
 	const productName = brand?.productName ?? "your account";
 	const who = name?.trim() || "there";
 	return (
@@ -36,32 +37,28 @@ export function PasswordResetEmail({
 			brand={brand}
 			preview={preview ?? `Reset your ${productName} password`}
 		>
-			<Heading style={styles.heading}>{heading ?? "Reset your password"}</Heading>
+			<Heading {...s.heading}>{heading ?? "Reset your password"}</Heading>
 
-			<Text style={styles.paragraph}>
+			<Text {...s.paragraph}>
 				{body ?? (
 					<>
-						Hi {who}, we received a request to reset the password for your{" "}
-						{productName} account. Click below to choose a new one — the
-						link expires shortly.
+						Hi {who}, we received a request to reset the password on your{" "}
+						{productName} account. Choose a new one below — the link expires
+						shortly and works once.
 					</>
 				)}
 			</Text>
 
-			<EmailButton href={resetUrl} color={brand?.brandColor}>
+			<EmailButton brand={brand} href={resetUrl}>
 				{ctaLabel ?? "Reset password"}
 			</EmailButton>
 
-			<Text style={styles.muted}>
-				Or paste this link into your browser:
-				<br />
-				{resetUrl}
+			<Text {...s.muted}>
+				If you didn't request this, ignore this email — your password won't
+				change.
 			</Text>
 
-			<Text style={styles.muted}>
-				If you didn't request a password reset, you can safely ignore this email
-				— your password won't change.
-			</Text>
+			<WireLink brand={brand} url={resetUrl} />
 		</BaseEmail>
 	);
 }

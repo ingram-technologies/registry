@@ -23,14 +23,29 @@ Two layers so far: **email** (transactional React Email templates) and **ui**
 
 ### email
 
-| Item                   | What it is                                                          |
-| ---------------------- | ------------------------------------------------------------------ |
-| `email-base`           | Brand-neutral shell + CTA button + shared styles + `renderEmail()` |
-| `email-invitation`     | Organization/team invitation (built on `email-base`)               |
-| `email-verification`   | Email-address verification (built on `email-base`)                 |
-| `email-magic-link`     | Passwordless / magic-link sign-in (built on `email-base`)          |
-| `email-password-reset` | Password reset (built on `email-base`)                             |
-| `email-welcome`        | Post-signup welcome, optional CTA (built on `email-base`)          |
+| Item                   | What it is                                                              |
+| ---------------------- | ----------------------------------------------------------------------- |
+| `email-base`           | Brand-neutral shell + CTA button + wire-link + `EmailTheme` + `renderEmail()` |
+| `email-theme-ingram`   | The Ingram house theme — one object, drop-in over `email-base`          |
+| `email-invitation`     | Organization/team invitation (built on `email-base`)                   |
+| `email-verification`   | Email-address verification (built on `email-base`)                     |
+| `email-magic-link`     | Passwordless / magic-link sign-in (built on `email-base`)              |
+| `email-password-reset` | Password reset (built on `email-base`)                                 |
+| `email-welcome`        | Post-signup welcome, optional CTA (built on `email-base`)              |
+
+**Templates are neutral; themes are data.** The shell renders four bands — an
+accent rule, a masthead, the message, a footer — and takes every colour, font,
+and radius from an `EmailTheme`. No template names a colour, so a house style is
+one object rather than a fork of six files, and a product that wants its own look
+writes a different object instead of editing templates. `email-theme-ingram` is
+the first such theme; a product with its own identity ships beside it, not
+instead of it.
+
+The shell also handles what's easy to forget in email: a `prefers-color-scheme`
+block generated from the theme's own `dark` overrides (an inline colour with no
+dark class is invisible on a dark client, and light-mode tests never catch it),
+`@media` padding for narrow screens, and a monospace fallback line carrying the
+CTA's URL for clients that strip buttons.
 
 ### ui
 
@@ -94,15 +109,14 @@ transport):
 ```tsx
 import { renderEmail } from "@/lib/email/render";
 import { InvitationEmail } from "@/components/emails/invitation-email";
+import { ingramBrand } from "@/components/emails/theme-ingram";
 import { fromAddress, sendEmail } from "@ingram-tech/nk-email";
 
-const brand = {
+const brand = ingramBrand({
 	productName: "Acme",
 	baseUrl: "https://acme.example",
-	logoUrl: "https://acme.example/logo.png",
-	brandColor: "#2563eb",
 	supportUrl: "/contact",
-};
+});
 
 const { html, text } = await renderEmail(
 	<InvitationEmail
@@ -118,8 +132,32 @@ const { html, text } = await renderEmail(
 await sendEmail({ to, from: fromAddress("Acme", "invites"), subject, html, text });
 ```
 
-Pass `brand` at each render, or (more common) wrap `BaseEmail` in a small local
-component that fills it in from your config so templates stay terse.
+Without `ingramBrand`, a bare `{ productName, baseUrl }` renders under the
+neutral theme. Define the brand once per app and pass it at each render.
+
+### Theming
+
+`brand.theme` is an `EmailTheme` — surfaces, three ink levels, one accent and the
+text colour that sits on it, a link colour, a radius, and two font stacks, plus
+optional `dark` overrides. To take a product somewhere else, spread and change
+what differs:
+
+```ts
+import { ingramTheme } from "@/components/emails/theme-ingram";
+
+const brand = ingramBrand({
+	productName: "Acme",
+	baseUrl: "https://acme.example",
+	theme: { ...ingramTheme, accent: "#0F766E", accentInk: "#FFFFFF" },
+});
+```
+
+Two rules when you do: **the accent's text colour is not automatic** — check
+`accentInk` against `accent` at 4.5:1, since a mid-tone accent usually needs
+near-black rather than white — and **a `link` must clear 4.5:1 on `surface`**,
+which most brand accents don't. Templates read these through `emailStyles(brand)`
+and never write a colour of their own, so getting the theme right is the whole
+job.
 
 ### Overriding copy
 

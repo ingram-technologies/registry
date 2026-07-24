@@ -7,7 +7,7 @@
 			"name": "email-base",
 			"type": "registry:component",
 			"title": "Email base layout",
-			"description": "Brand-neutral React Email shell (header, content, footer) plus a CTA button and shared styles. Pass your product's identity via the EmailBrand prop, or edit the copied source directly. Ships a renderEmail() helper that returns { html, text } ready for any transactional email transport.",
+			"description": "Brand-neutral React Email shell — accent rule, masthead, message, footer — plus a CTA button, a mono wire-link block, and dark-mode and small-screen handling. Colour and type come from an EmailTheme, so reskinning a product is a data change rather than an edit to every template. Ships a renderEmail() helper that returns { html, text } ready for any transactional email transport.",
 			"dependencies": ["react-email"],
 			"files": [
 				{
@@ -16,9 +16,30 @@
 					"target": "components/emails/base-email.tsx"
 				},
 				{
+					"path": "registry/email/theme.ts",
+					"type": "registry:component",
+					"target": "components/emails/theme.ts"
+				},
+				{
 					"path": "registry/email/render.ts",
 					"type": "registry:lib",
 					"target": "lib/email/render.ts"
+				}
+			]
+		},
+		{
+			"name": "email-theme-ingram",
+			"type": "registry:component",
+			"title": "Ingram email theme",
+			"description": "The house theme for transactional email: chroma-0 neutrals, one coral signal, Inter and JetBrains Mono, every pair AA. Drop it in beside email-base and every template already installed carries the identity — ingramBrand() is the only thing a product writes.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/email-base.json"
+			],
+			"files": [
+				{
+					"path": "registry/email/theme-ingram.ts",
+					"type": "registry:component",
+					"target": "components/emails/theme-ingram.ts"
 				}
 			]
 		},

@@ -1,16 +1,10 @@
 import { PasswordResetEmail } from "../registry/email/password-reset-email";
-
-const brand = {
-	productName: "Acme",
-	baseUrl: "https://acme.example",
-	brandColor: "#2563eb",
-	supportUrl: "/contact",
-};
+import { neutral } from "./brand";
 
 export default function Preview() {
 	return (
 		<PasswordResetEmail
-			brand={brand}
+			brand={neutral}
 			name="Sam"
 			resetUrl="https://acme.example/reset/tok456"
 		/>

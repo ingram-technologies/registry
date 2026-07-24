@@ -1,10 +1,12 @@
 import { InvitationEmail } from "../registry/email/invitation-email";
-import { neutral } from "./brand";
+import { ingram } from "./brand";
 
+/** The neutral invitation, rethemed. Compare against `invitation-email`: the
+ *  templates are byte-identical, only the brand object differs. */
 export default function Preview() {
 	return (
 		<InvitationEmail
-			brand={neutral}
+			brand={ingram}
 			inviterName="Alex Rivera"
 			organizationName="Widgets Inc"
 			role="admin"
