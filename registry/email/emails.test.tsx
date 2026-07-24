@@ -230,6 +230,19 @@ describe("the shell is themeable, not hard-coded", () => {
 		expect(html).not.toContain("prefers-color-scheme");
 	});
 
+	it("leaves an already-absolute footer link alone, scheme and all", async () => {
+		const mailto: EmailBrand = {
+			...brand,
+			supportUrl: "mailto:support@acme.example",
+		};
+		const { html } = await renderEmail(
+			<BaseEmail brand={mailto} preview="hello">
+				<p>body</p>
+			</BaseEmail>,
+		);
+		expect(html).toContain('href="mailto:support@acme.example"');
+	});
+
 	it("renders footer links only for the URLs a brand supplies", async () => {
 		const supportOnly: EmailBrand = {
 			productName: "Acme",

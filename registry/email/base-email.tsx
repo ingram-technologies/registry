@@ -30,9 +30,11 @@ export { neutralBrand, neutralTheme } from "./theme";
 
 const resolveTheme = (brand: EmailBrand): EmailTheme => brand.theme ?? neutralTheme;
 
+/** Anything carrying a scheme is already absolute — `mailto:` included, which
+ *  is what a support link usually is when a product has no support page. */
 const resolveUrl = (href: string | undefined, baseUrl: string): string | undefined => {
 	if (!href) return undefined;
-	if (/^https?:\/\//.test(href)) return href;
+	if (/^[a-z][a-z0-9+.-]*:/i.test(href)) return href;
 	return `${baseUrl.replace(/\/+$/, "")}/${href.replace(/^\/+/, "")}`;
 };
 
