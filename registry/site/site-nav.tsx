@@ -34,9 +34,10 @@ export interface SiteNavProps {
 	cta?: ReactNode;
 	/**
 	 * Extra rows at the bottom of the mobile sheet (a contact button, the CTA).
-	 * Receives a `close` callback to collapse the sheet after an action.
+	 * Any click inside it collapses the sheet, so a plain node works from a
+	 * server component — no callback to thread through.
 	 */
-	mobileFooter?: (close: () => void) => ReactNode;
+	mobileFooter?: ReactNode;
 	/** Accessible name for the logo link. */
 	siteName?: string;
 }
@@ -175,7 +176,9 @@ export function SiteNav({
 									</Link>
 								),
 							)}
-							{mobileFooter?.(closeMobile)}
+							{mobileFooter && (
+								<div onClick={closeMobile}>{mobileFooter}</div>
+							)}
 						</div>
 					)}
 				</div>
