@@ -1,0 +1,176 @@
+/*
+ * Ingram brand materials for marketing surfaces — the utilities the product
+ * sites share on top of the dashboard-theme tokens: purposeful glass (nav and
+ * elevated shells only), the signature CTA pill, the page-header entrance, and
+ * the blueprint-field keyframes. Import once from the app's global stylesheet:
+ *
+ *   @import "./brand.css";
+ *
+ * Everything here reads the semantic tokens (--background, --card, --border,
+ * --primary, --shadow-*), so it renders correctly wherever those are defined.
+ */
+
+/* ── Glass (the Purposeful Glass Rule: surfaces that float over content) ── */
+.glass-card {
+	background: color-mix(in oklch, var(--card) 50%, transparent);
+	backdrop-filter: blur(10px);
+	border: 1px solid var(--border);
+	border-radius: 16px;
+	box-shadow: var(--shadow-xl);
+}
+
+.glass-card-hover {
+	transition: all 0.3s ease;
+}
+
+.glass-card-hover:hover {
+	background: color-mix(in oklch, var(--card) 70%, transparent);
+	border-color: var(--primary);
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-2xl);
+}
+
+.glass-nav {
+	background: color-mix(in oklch, var(--background) 80%, transparent);
+	backdrop-filter: blur(20px);
+	border-bottom: 1px solid var(--border);
+}
+
+/* ── The signature CTA pill: coral ghost at rest, molten fill on hover ── */
+.btn-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+	white-space: nowrap;
+	height: 2.5rem;
+	padding: 0 1.5rem;
+	border-radius: 9999px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.025em;
+	text-decoration: none;
+	color: var(--primary);
+	background-color: color-mix(in oklch, var(--primary) 10%, transparent);
+	border: 1px solid color-mix(in oklch, var(--primary) 20%, transparent);
+	box-shadow: var(--shadow-lg);
+	transition:
+		color 0.3s ease,
+		background 0.3s ease,
+		border-color 0.3s ease,
+		box-shadow 0.3s ease,
+		transform 0.3s ease;
+}
+
+.btn-cta:hover {
+	color: #fff;
+	background-color: transparent;
+	background-image: linear-gradient(135deg, #ff5757, #a12a17);
+	border-color: transparent;
+	box-shadow: 0 8px 32px -8px hsl(0 100% 67% / 0.45);
+	transform: translateY(-1px);
+}
+
+.btn-cta:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+}
+
+/* ── Page-header entrance. The resting state is visible: if the animation
+   never runs (hidden tab, headless render, no JS) the content is simply there. ── */
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.rise-in {
+	animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Blueprint field: word-by-word reveal + accent rules that draw in ── */
+@keyframes word-appear {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.word {
+	opacity: 0;
+	display: inline-block;
+}
+
+@keyframes draw-line {
+	0% {
+		stroke-dasharray: 0 100;
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		stroke-dasharray: 100 0;
+		opacity: 0.8;
+	}
+}
+
+.grid-line {
+	stroke-dasharray: 0 100;
+	opacity: 0;
+}
+
+/* ── Scrollbar, tuned for the charcoal ground ── */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Reduced motion: content is never gated behind an animation. Snap every
+   entrance to its finished, visible state and neutralise ambient motion. ── */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+
+	.word {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
+	.grid-line {
+		stroke-dasharray: 100 0 !important;
+		opacity: 0.8 !important;
+	}
+}

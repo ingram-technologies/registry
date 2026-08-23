@@ -79,6 +79,27 @@ renders correctly in any app that defines the tokens. Sources import
 | `status-badge`          | Semantic status pill with one consistent tone mapping                  |
 | `delete-confirm-dialog` | Type-to-confirm destructive dialog                                     |
 
+### site
+
+The marketing-surface layer — what the family's public sites share on top of
+`dashboard-theme` so they read as one brand. Everything is data-in: the site
+passes its logo, sections and copy; the chrome is shared.
+
+| Item              | What it is                                                                    |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `site-theme`      | `app/brand.css`: purposeful glass, the coral `.btn-cta` pill, `rise-in`, blueprint keyframes, reduced-motion rules |
+| `navigation-menu` | Base UI navigation-menu primitive with a non-clipping popup (flyouts can escape) |
+| `nav-dropdown`    | Hover dropdown panel: title + description rows, badges, subsections, flyouts   |
+| `site-nav`        | Floating glass pill (desktop) / glass bar + sheet (mobile); sections are data |
+| `site-footer`     | Logo + blurb, Connect column, hairline, motto + small-print links              |
+| `blueprint-field` | The signature hero motif: faint grid, drawing coral rules, registration dots   |
+
+```bash
+npx shadcn@latest add @ingram/site-theme @ingram/site-nav @ingram/site-footer @ingram/blueprint-field
+```
+
+Then `@import "./brand.css";` from the app's global stylesheet.
+
 ## Consuming it
 
 One-off:

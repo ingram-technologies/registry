@@ -7,7 +7,7 @@
 			"name": "email-base",
 			"type": "registry:component",
 			"title": "Email base layout",
-			"description": "Brand-neutral React Email shell — accent rule, masthead, message, footer — plus a CTA button, a mono wire-link block, and dark-mode and small-screen handling. Colour and type come from an EmailTheme, so reskinning a product is a data change rather than an edit to every template. Ships a renderEmail() helper that returns { html, text } ready for any transactional email transport.",
+			"description": "Brand-neutral React Email shell \u2014 accent rule, masthead, message, footer \u2014 plus a CTA button, a mono wire-link block, and dark-mode and small-screen handling. Colour and type come from an EmailTheme, so reskinning a product is a data change rather than an edit to every template. Ships a renderEmail() helper that returns { html, text } ready for any transactional email transport.",
 			"dependencies": ["react-email"],
 			"files": [
 				{
@@ -31,7 +31,7 @@
 			"name": "email-theme-ingram",
 			"type": "registry:component",
 			"title": "Ingram email theme",
-			"description": "The house theme for transactional email: chroma-0 neutrals, one coral signal, Inter and JetBrains Mono, every pair AA. Drop it in beside email-base and every template already installed carries the identity — ingramBrand() is the only thing a product writes.",
+			"description": "The house theme for transactional email: chroma-0 neutrals, one coral signal, Inter and JetBrains Mono, every pair AA. Drop it in beside email-base and every template already installed carries the identity \u2014 ingramBrand() is the only thing a product writes.",
 			"registryDependencies": [
 				"https://ingram-technologies.github.io/registry/r/email-base.json"
 			],
@@ -495,7 +495,7 @@
 			"name": "status-badge",
 			"type": "registry:component",
 			"title": "Status badge",
-			"description": "Semantic status pill mapping entity states (succeeded/failed/pending/running/…) to one consistent color language, with a tone override.",
+			"description": "Semantic status pill mapping entity states (succeeded/failed/pending/running/\u2026) to one consistent color language, with a tone override.",
 			"registryDependencies": ["utils"],
 			"files": [
 				{
@@ -522,6 +522,105 @@
 					"path": "registry/ui/delete-confirm-dialog.tsx",
 					"type": "registry:component",
 					"target": "components/ui/delete-confirm-dialog.tsx"
+				}
+			]
+		},
+		{
+			"name": "site-theme",
+			"type": "registry:style",
+			"title": "Site theme (brand materials)",
+			"description": "The marketing-surface layer on top of dashboard-theme: purposeful glass (.glass-nav, .glass-card), the signature coral CTA pill (.btn-cta), the rise-in page-header entrance, the blueprint-field keyframes, a charcoal scrollbar, and the reduced-motion rules that keep every entrance visible. Import app/brand.css once from the global stylesheet.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/dashboard-theme.json"
+			],
+			"files": [
+				{
+					"path": "registry/site/brand.css",
+					"type": "registry:file",
+					"target": "app/brand.css"
+				}
+			]
+		},
+		{
+			"name": "navigation-menu",
+			"type": "registry:component",
+			"title": "Navigation menu",
+			"description": "Base UI navigation-menu primitive with a transparent, non-clipping shared popup: each content panel carries its own surface styling so bespoke flyouts can escape the popup bounds. A forgiving 300ms hover-out grace period.",
+			"dependencies": [
+				"@base-ui/react",
+				"class-variance-authority",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/site/navigation-menu.tsx",
+					"type": "registry:component",
+					"target": "components/ui/navigation-menu.tsx"
+				}
+			]
+		},
+		{
+			"name": "nav-dropdown",
+			"type": "registry:component",
+			"title": "Nav dropdown",
+			"description": "A hover-opened dropdown panel for the site nav: title + description rows with optional badges, non-clickable (coming-soon) entries, labelled subsections, and a row-with-flyout for nested menus. Data in, panel out.",
+			"dependencies": ["lucide-react", "next"],
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/navigation-menu.json"
+			],
+			"files": [
+				{
+					"path": "registry/site/nav-dropdown.tsx",
+					"type": "registry:component",
+					"target": "components/nav-dropdown.tsx"
+				}
+			]
+		},
+		{
+			"name": "site-nav",
+			"type": "registry:component",
+			"title": "Site navigation",
+			"description": "The marketing-site navigation shared across the family: a floating glass pill on desktop, a fixed glass bar with a collapsible sheet on mobile. The site passes its logo, sections (links or dropdowns) and CTA; the chrome is shared.",
+			"dependencies": ["lucide-react", "next"],
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/nav-dropdown.json",
+				"https://ingram-technologies.github.io/registry/r/site-theme.json"
+			],
+			"files": [
+				{
+					"path": "registry/site/site-nav.tsx",
+					"type": "registry:component",
+					"target": "components/site-nav.tsx"
+				}
+			]
+		},
+		{
+			"name": "site-footer",
+			"type": "registry:component",
+			"title": "Site footer",
+			"description": "The marketing-site footer: logo + blurb, a Connect column of profiles, a hairline, then the motto and the small-print links. Content is data; the chrome is shared.",
+			"dependencies": ["next"],
+			"files": [
+				{
+					"path": "registry/site/site-footer.tsx",
+					"type": "registry:component",
+					"target": "components/site-footer.tsx"
+				}
+			]
+		},
+		{
+			"name": "blueprint-field",
+			"type": "registry:component",
+			"title": "Blueprint field",
+			"description": "The brand's signature hero motif: a faint 60px grid, four coral accent rules that draw in on load, and four pulsing registration dots. The drawn state is the resting state \u2014 reduced motion and no-JS both leave it fully visible. Needs the keyframes from site-theme.",
+			"registryDependencies": [
+				"https://ingram-technologies.github.io/registry/r/site-theme.json"
+			],
+			"files": [
+				{
+					"path": "registry/site/blueprint-field.tsx",
+					"type": "registry:component",
+					"target": "components/blueprint-field.tsx"
 				}
 			]
 		}

@@ -13,6 +13,8 @@
 		"verbatimModuleSyntax": true,
 		"types": ["node"],
 		"paths": {
+			"@/components/ui/navigation-menu": ["./registry/site/navigation-menu.tsx"],
+			"@/components/nav-dropdown": ["./registry/site/nav-dropdown.tsx"],
 			"@/components/ui/*": ["./registry/ui/*"],
 			"@/*": ["./*"]
 		}
