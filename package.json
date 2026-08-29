@@ -14,6 +14,7 @@
 		"build": "shadcn build",
 		"lint": "oxlint",
 		"format": "oxfmt --write .",
+		"ci": "bun run check && bun run type-check && bun run test && bun run build",
 		"check": "oxlint && oxfmt --check . && bun run scripts/check-site-names.ts",
 		"type-check": "tsc --noEmit",
 		"preview": "email dev --dir preview",
